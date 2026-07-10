@@ -1,5 +1,7 @@
 import { execSync } from 'node:child_process';
 import { Item, GildedRose } from '@/gilded-rose';
+import { expect } from 'vitest';
+import { describe, it } from 'vitest';
 
 /**
  * This test uses Vitest Snapshot, similar to [Jest Snapshot](https://goo.gl/fbAQLP).
@@ -12,13 +14,6 @@ import { Item, GildedRose } from '@/gilded-rose';
  */
 
 describe('Gilded Rose Approval', () => {
-  it('should foo', () => {
-    const gildedRose = new GildedRose([new Item('foo', 0, 0)]);
-    const items = gildedRose.updateQuality();
-
-    expect(items).toMatchSnapshot();
-  });
-
   it('should thirtyDays', () => {
     const consoleOutput = execSync(
       'ts-node test/golden-master-text-test.ts 30',

@@ -1,4 +1,5 @@
 import { Item, GildedRose } from '@/gilded-rose';
+import { describe, expect, it } from 'vitest';
 
 describe('Gilded Rose', () => {
   it('should foo', () => {
