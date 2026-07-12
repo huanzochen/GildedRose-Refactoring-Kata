@@ -172,5 +172,16 @@ describe('Gilded Rose', () => {
         expect(items[0].quality).toMatchInlineSnapshot('0');
       });
     });
+
+    describe('Conjured', () => {
+      // FIXME: Conjured items degrade in Quality twice as fast as normal items
+      it('Quality 10', () => {
+        const gildedRose = new GildedRose([new Item('Conjured', 10, 10)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot('"Conjured"');
+        expect(items[0].sellIn).toMatchInlineSnapshot('9');
+        expect(items[0].quality).toMatchInlineSnapshot('9');
+      });
+    });
   });
 });
