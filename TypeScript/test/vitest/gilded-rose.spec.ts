@@ -33,6 +33,14 @@ describe('Gilded Rose', () => {
         expect(items[0].quality).toMatchInlineSnapshot('0');
       });
 
+      it('sellIn < 0 , Quality minus * 2', () => {
+        const gildedRose = new GildedRose([new Item('apple', -1, 20)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot('"apple"');
+        expect(items[0].sellIn).toMatchInlineSnapshot('-2');
+        expect(items[0].quality).toMatchInlineSnapshot('18');
+      });
+
       it('Quality >= 99', () => {
         const gildedRose = new GildedRose([new Item('apple', 10, 99)]);
         const items = gildedRose.updateQuality();
@@ -149,6 +157,18 @@ describe('Gilded Rose', () => {
           '"Backstage passes to a TAFKAL80ETC concert"',
         );
         expect(items[0].sellIn).toMatchInlineSnapshot('-1');
+        expect(items[0].quality).toMatchInlineSnapshot('0');
+      });
+
+      it('Quality 0 when sellIn < 0', () => {
+        const gildedRose = new GildedRose([
+          new Item('Backstage passes to a TAFKAL80ETC concert', -1, 30),
+        ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot(
+          '"Backstage passes to a TAFKAL80ETC concert"',
+        );
+        expect(items[0].sellIn).toMatchInlineSnapshot('-2');
         expect(items[0].quality).toMatchInlineSnapshot('0');
       });
     });
