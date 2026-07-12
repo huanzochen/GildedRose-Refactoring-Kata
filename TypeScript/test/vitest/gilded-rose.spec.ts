@@ -89,6 +89,18 @@ describe('Gilded Rose', () => {
         expect(items[0].sellIn).toMatchInlineSnapshot('10');
         expect(items[0].quality).toMatchInlineSnapshot('80');
       });
+
+      it('Quality init 50', () => {
+        const gildedRose = new GildedRose([
+          new Item('Sulfuras, Hand of Ragnaros', 10, 50),
+        ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot(
+          '"Sulfuras, Hand of Ragnaros"',
+        );
+        expect(items[0].sellIn).toMatchInlineSnapshot('10');
+        expect(items[0].quality).toMatchInlineSnapshot('50');
+      });
     });
   });
 });
