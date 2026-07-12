@@ -102,5 +102,55 @@ describe('Gilded Rose', () => {
         expect(items[0].quality).toMatchInlineSnapshot('50');
       });
     });
+
+    describe('Backstage passes', () => {
+      it('Quality will up everyday', () => {
+        const gildedRose = new GildedRose([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 15, 80),
+        ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot(
+          '"Backstage passes to a TAFKAL80ETC concert"',
+        );
+        expect(items[0].sellIn).toMatchInlineSnapshot('14');
+        expect(items[0].quality).toMatchInlineSnapshot('80');
+      });
+
+      it('Quality *2 when sellIn is between 10 and 5', () => {
+        const gildedRose = new GildedRose([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 9, 30),
+        ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot(
+          '"Backstage passes to a TAFKAL80ETC concert"',
+        );
+        expect(items[0].sellIn).toMatchInlineSnapshot('8');
+        expect(items[0].quality).toMatchInlineSnapshot('32');
+      });
+
+      it('Quality *3 when sellIn is between 5 and 0', () => {
+        const gildedRose = new GildedRose([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 5, 30),
+        ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot(
+          '"Backstage passes to a TAFKAL80ETC concert"',
+        );
+        expect(items[0].sellIn).toMatchInlineSnapshot('4');
+        expect(items[0].quality).toMatchInlineSnapshot('33');
+      });
+
+      it('Quality 0 when sellIn <= 0', () => {
+        const gildedRose = new GildedRose([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 0, 30),
+        ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot(
+          '"Backstage passes to a TAFKAL80ETC concert"',
+        );
+        expect(items[0].sellIn).toMatchInlineSnapshot('-1');
+        expect(items[0].quality).toMatchInlineSnapshot('0');
+      });
+    });
   });
 });
