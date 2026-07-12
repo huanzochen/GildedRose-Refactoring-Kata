@@ -16,20 +16,38 @@ describe('Gilded Rose', () => {
   });
 
   describe('updateQuality', () => {
-    it('when sellIn > 0', () => {
-      const gildedRose = new GildedRose([new Item('apple', 10, 1)]);
-      const items = gildedRose.updateQuality();
-      expect(items[0].name).toMatchInlineSnapshot('"apple"');
-      expect(items[0].sellIn).toMatchInlineSnapshot('9');
-      expect(items[0].quality).toMatchInlineSnapshot('0');
-    });
+    describe('Normal Items', () => {
+      it('sellIn > 0', () => {
+        const gildedRose = new GildedRose([new Item('apple', 10, 1)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot('"apple"');
+        expect(items[0].sellIn).toMatchInlineSnapshot('9');
+        expect(items[0].quality).toMatchInlineSnapshot('0');
+      });
 
-    it('when sellIn 0', () => {
-      const gildedRose = new GildedRose([new Item('apple', 0, 1)]);
-      const items = gildedRose.updateQuality();
-      expect(items[0].name).toMatchInlineSnapshot('"apple"');
-      expect(items[0].sellIn).toMatchInlineSnapshot('-1');
-      expect(items[0].quality).toMatchInlineSnapshot('0');
+      it('sellIn 0', () => {
+        const gildedRose = new GildedRose([new Item('apple', 0, 1)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot('"apple"');
+        expect(items[0].sellIn).toMatchInlineSnapshot('-1');
+        expect(items[0].quality).toMatchInlineSnapshot('0');
+      });
+
+      it('Quality >= 99', () => {
+        const gildedRose = new GildedRose([new Item('apple', 10, 99)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot('"apple"');
+        expect(items[0].sellIn).toMatchInlineSnapshot('9');
+        expect(items[0].quality).toMatchInlineSnapshot('98');
+      });
+
+      it('Quality in 50', () => {
+        const gildedRose = new GildedRose([new Item('apple', 10, 50)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot('"apple"');
+        expect(items[0].sellIn).toMatchInlineSnapshot('9');
+        expect(items[0].quality).toMatchInlineSnapshot('49');
+      });
     });
 
     describe('Aged Brie', () => {
@@ -56,6 +74,20 @@ describe('Gilded Rose', () => {
         expect(items[0].name).toMatchInlineSnapshot('"Aged Brie"');
         expect(items[0].sellIn).toMatchInlineSnapshot('-1');
         expect(items[0].quality).toMatchInlineSnapshot('3');
+      });
+    });
+
+    describe('Sulfuras', () => {
+      it('Never expires && Quality lock in 80', () => {
+        const gildedRose = new GildedRose([
+          new Item('Sulfuras, Hand of Ragnaros', 10, 80),
+        ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot(
+          '"Sulfuras, Hand of Ragnaros"',
+        );
+        expect(items[0].sellIn).toMatchInlineSnapshot('10');
+        expect(items[0].quality).toMatchInlineSnapshot('80');
       });
     });
   });
