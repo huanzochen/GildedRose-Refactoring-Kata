@@ -55,7 +55,7 @@ export class GildedRose {
         item.quality = Math.min(item.quality + 1, 50);
       }
     }
-    if (item.sellIn <= 0) item.quality = item.quality - item.quality;
+    if (item.sellIn <= 0) item.quality = 0;
 
     item.sellIn -= 1;
   }
