@@ -34,13 +34,16 @@ export class GildedRose {
   //   }
 
   updateItemAgedBrie(item: Item) {
-    item.sellIn -= 1;
-
     const isExpired = item.sellIn <= 0;
-    if (item.quality >= 50 || item.quality <= 0) return;
+    if (item.quality >= 50) {
+      item.sellIn -= 1;
+      return;
+    } else if (item.quality < 50) {
+      if (isExpired && item.quality <= 48) item.quality += 2;
+      else item.quality += 1;
 
-    if (item.quality < 50)
-      item.quality = isExpired ? (item.quality += 2) : (item.quality += 1);
+      item.sellIn -= 1;
+    }
   }
 
   updateItem(item: Item) {
