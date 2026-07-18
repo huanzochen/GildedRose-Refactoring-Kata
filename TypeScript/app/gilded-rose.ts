@@ -35,7 +35,6 @@ export class GildedRose {
 
   updateItemAgedBrie(item: Item) {
     const isExpired = item.sellIn <= 0;
-
     const updateQuality = (item) => {
       if (item.quality >= 50 || item.quality <= 0) return;
 
