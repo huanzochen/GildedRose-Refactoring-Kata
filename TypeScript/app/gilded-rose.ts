@@ -35,15 +35,12 @@ export class GildedRose {
 
   updateItemAgedBrie(item: Item) {
     const isExpired = item.sellIn <= 0;
-    if (item.quality >= 50) {
-      item.sellIn -= 1;
-      return;
-    } else if (item.quality < 50) {
+    if (item.quality < 50) {
       if (isExpired && item.quality <= 48) item.quality += 2;
       else item.quality += 1;
-
-      item.sellIn -= 1;
     }
+
+    item.sellIn -= 1;
   }
 
   updateItem(item: Item) {
@@ -74,7 +71,7 @@ export class GildedRose {
         }
       }
     }
-    item.sellIn = item.sellIn - 1;
+    item.sellIn -= 1;
     if (item.sellIn < 0) {
       if (item.name != ItemType.BACKSTAGE_PASSES) {
         if (item.quality > 0) {
