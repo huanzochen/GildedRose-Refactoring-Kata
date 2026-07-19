@@ -56,12 +56,12 @@ export class GildedRose {
   }
 
   updateConjured(item: Item) {
-    if (item.quality > 0) item.quality = item.quality - 1 * 2;
+    if (item.quality > 0) item.quality = Math.max(item.quality - 2, 0);
     item.sellIn -= 1;
 
     if (item.sellIn < 0) {
       if (item.quality > 0) {
-        item.quality = item.quality - 1 * 2;
+        item.quality = Math.max(item.quality - 2, 0);
       }
     }
   }

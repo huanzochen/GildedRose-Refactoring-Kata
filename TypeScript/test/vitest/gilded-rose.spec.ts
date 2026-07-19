@@ -188,6 +188,14 @@ describe('Gilded Rose', () => {
         expect(items[0].sellIn).toMatchInlineSnapshot('-1');
         expect(items[0].quality).toMatchInlineSnapshot('6');
       });
+
+      it('quality never goes negative', () => {
+        const gildedRose = new GildedRose([
+          new Item('Conjured Mana Cake', 5, 1),
+        ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).toBe(0);
+      });
     });
   });
 });
