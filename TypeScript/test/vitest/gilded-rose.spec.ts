@@ -174,13 +174,19 @@ describe('Gilded Rose', () => {
     });
 
     describe('Conjured', () => {
-      // FIXME: Conjured items degrade in Quality twice as fast as normal items
       it('Quality 10', () => {
         const gildedRose = new GildedRose([new Item('Conjured', 10, 10)]);
         const items = gildedRose.updateQuality();
         expect(items[0].name).toMatchInlineSnapshot('"Conjured"');
         expect(items[0].sellIn).toMatchInlineSnapshot('9');
-        expect(items[0].quality).toMatchInlineSnapshot('9');
+        expect(items[0].quality).toMatchInlineSnapshot('8');
+      });
+      it('Sell In 0 will Degrade Quality * 2', () => {
+        const gildedRose = new GildedRose([new Item('Conjured', 0, 10)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].name).toMatchInlineSnapshot('"Conjured"');
+        expect(items[0].sellIn).toMatchInlineSnapshot('-1');
+        expect(items[0].quality).toMatchInlineSnapshot('6');
       });
     });
   });
