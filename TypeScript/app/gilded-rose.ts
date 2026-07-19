@@ -14,7 +14,6 @@ enum ItemType {
   AGED_BRIE = 'Aged Brie',
   BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert',
   SULFURAS = 'Sulfuras, Hand of Ragnaros',
-  NORMAL = 'Normal Item',
 }
 
 export class GildedRose {
@@ -73,10 +72,8 @@ export class GildedRose {
       this.updateBackStagePasses(item);
       return;
     }
-    if (item.name === ItemType.NORMAL) {
-      this.updateNormalItem(item);
-      return;
-    }
+
+    this.updateNormalItem(item);
   }
 
   updateQuality() {
