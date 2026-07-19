@@ -14,6 +14,7 @@ enum ItemType {
   AGED_BRIE = 'Aged Brie',
   BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert',
   SULFURAS = 'Sulfuras, Hand of Ragnaros',
+  Conjured = 'Conjured',
 }
 
 export class GildedRose {
@@ -54,10 +55,19 @@ export class GildedRose {
     item.sellIn -= 1;
   }
 
-  updateNormalItem(item: Item) {
-    if (item.quality > 0) {
-      item.quality = item.quality - 1;
+  updateConjured(item: Item) {
+    if (item.quality > 0) item.quality = item.quality - 1 * 2;
+    item.sellIn -= 1;
+
+    if (item.sellIn < 0) {
+      if (item.quality > 0) {
+        item.quality = item.quality - 1 * 2;
+      }
     }
+  }
+
+  updateNormalItem(item: Item) {
+    if (item.quality > 0) item.quality = item.quality - 1;
     item.sellIn -= 1;
     if (item.sellIn < 0) {
       if (item.quality > 0) {
@@ -74,6 +84,10 @@ export class GildedRose {
     }
     if (item.name === ItemType.BACKSTAGE_PASSES) {
       this.updateBackstagePasses(item);
+      return;
+    }
+    if (item.name === ItemType.Conjured) {
+      this.updateConjured(item);
       return;
     }
 
