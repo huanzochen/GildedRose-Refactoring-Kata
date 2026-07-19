@@ -23,7 +23,7 @@ export class GildedRose {
     this.items = items;
   }
 
-  updateItemAgedBrie(item: Item) {
+  updateAgedBrie(item: Item) {
     const isExpired = item.sellIn <= 0;
     if (item.quality < 50) {
       item.quality = Math.min(
@@ -42,7 +42,7 @@ export class GildedRose {
       return;
     }
 
-    if (item.quality <= 50) {
+    if (item.quality < 50) {
       if (item.sellIn <= 10 && item.sellIn > 5)
         item.quality = Math.min(item.quality + 2, 50);
       else if (item.sellIn <= 5 && item.sellIn > 0)
@@ -70,7 +70,7 @@ export class GildedRose {
   updateItem(item: Item) {
     if (item.name === ItemType.SULFURAS) return;
     if (item.name === ItemType.AGED_BRIE) {
-      this.updateItemAgedBrie(item);
+      this.updateAgedBrie(item);
       return;
     }
     if (item.name === ItemType.BACKSTAGE_PASSES) {
