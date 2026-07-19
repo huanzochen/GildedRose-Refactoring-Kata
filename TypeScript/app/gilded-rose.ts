@@ -45,8 +45,7 @@ export class GildedRose {
     if (item.quality < 50) {
       if (item.sellIn <= 10 && item.sellIn > 5)
         item.quality = Math.min(item.quality + 2, 50);
-      else if (item.sellIn <= 5 && item.sellIn > 0)
-        item.quality = Math.min(item.quality + 3, 50);
+      else if (item.sellIn <= 5) item.quality = Math.min(item.quality + 3, 50);
       else {
         item.quality = Math.min(item.quality + 1, 50);
       }
