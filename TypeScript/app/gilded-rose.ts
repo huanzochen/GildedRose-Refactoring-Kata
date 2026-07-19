@@ -36,6 +36,12 @@ export class GildedRose {
   }
 
   updateBackStagePasses(item: Item) {
+    if (item.sellIn <= 0) {
+      item.quality = 0;
+      item.sellIn -= 1;
+      return;
+    }
+
     if (item.quality <= 50) {
       if (item.sellIn <= 10 && item.sellIn > 5)
         item.quality = Math.min(item.quality + 2, 50);
@@ -45,7 +51,6 @@ export class GildedRose {
         item.quality = Math.min(item.quality + 1, 50);
       }
     }
-    if (item.sellIn <= 0) item.quality = 0;
 
     item.sellIn -= 1;
   }
