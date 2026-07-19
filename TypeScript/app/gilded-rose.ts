@@ -86,7 +86,7 @@ export class GildedRose {
       this.updateBackstagePasses(item);
       return;
     }
-    if (item.name === ItemType.Conjured) {
+    if (item.name.startsWith(ItemType.Conjured)) {
       this.updateConjured(item);
       return;
     }
