@@ -35,7 +35,7 @@ export class GildedRose {
     item.sellIn -= 1;
   }
 
-  updateBackStagePasses(item: Item) {
+  updateBackstagePasses(item: Item) {
     if (item.sellIn <= 0) {
       item.quality = 0;
       item.sellIn -= 1;
@@ -74,7 +74,7 @@ export class GildedRose {
       return;
     }
     if (item.name === ItemType.BACKSTAGE_PASSES) {
-      this.updateBackStagePasses(item);
+      this.updateBackstagePasses(item);
       return;
     }
 
